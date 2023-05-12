@@ -1,0 +1,112 @@
+baseURL: https://imyrs.cn
+title: ImYrS's Blog
+
+languageCode: zh
+DefaultContentLanguage: zh
+hasCJKLanguage: true
+
+theme: PaperMod
+
+paginate: 5
+
+enableRobotsTXT: true
+
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+enableEmoji: true
+enableGitInfo: false
+enableInlineShortcodes: true
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+Params:
+  env: production
+  title: ImYrS's Blog
+  description: 一个记录生活和技术的地方
+
+  defaultTheme: auto
+  disableThemeToggle: false
+  DateFormat: "2006-01-02"
+  ShowShareButtons: false
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: true
+  ShowWordCounts: true
+
+  homeInfoParams:
+    title: "你好 👋"
+    content: "欢迎来到我的博客, 我是 ImYrS. 这里是我记录生活和技术的地方, 希望你能在这里找到些有用的内容."
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/ImYrS"
+    - name: telegram
+      url: "https://t.me/ImYrS"
+
+  editPost:
+    URL: "https://github.com/ImYrS/blog/edit/main/content/posts"
+    Text: "Edit on GitHub"
+    appendFilePath: true
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+
+menu:
+  main:
+    - identifier: "首页"
+      name: "首页"
+      url: /
+      weight: 1
+    - identifier: "搜索"
+      name: "搜索"
+      url: /search
+      weight: 10
+    - identifier: "分类"
+      name: "分类"
+      url: /categories
+      weight: 20
+    - identifier: "归档"
+      name: "归档"
+      url: /archives
+      weight: 30
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+privacy:
+  vimeo:
+    disabled: false
+    simple: true
+
+  twitter:
+    disabled: false
+    enableDNT: true
+    simple: true
+
+  instagram:
+    disabled: false
+    simple: true
+
+  youtube:
+    disabled: false
+    privacyEnhanced: true
+
+services:
+  instagram:
+    disableInlineCSS: true
+  twitter:
+    disableInlineCSS: true

@@ -1,4 +1,4 @@
-baseURL: https://imyrs.cn
+baseURL:
 title: ImYrS's Blog
 
 languageCode: zh
@@ -40,7 +40,7 @@ Params:
 
   homeInfoParams:
     title: "你好 👋"
-    content: "欢迎来到我的博客, 我是 ImYrS. 这里是我记录生活和技术的地方, 希望你能在这里找到些有用的内容."
+    content: "欢迎来到我的博客, 我是 `ImYrS`. 这里是我记录生活和技术的地方, 希望你能在这里找到些有用的内容."
 
   socialIcons:
     - name: github
@@ -61,6 +61,15 @@ Params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
+
+markup:
+  highlight:
+    noClasses: false
+    # anchorLineNos: true
+    # codeFences: true
+    # guessSyntax: true
+    lineNos: true
+    # style: monokai
 
 menu:
   main:

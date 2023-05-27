@@ -115,7 +115,7 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 
    其中最重要的是 `--with-openssl=/usr/local/openssl` 和 `--with-openssl-rpath=auto` 这两个关键参数决定了能否使用最新的 `openssl`, 也是本文中最大的坑.
 
-   如果 `--enable-optimization` 打开优化后编译失败, 可以考虑移除这个参数
+   如果 `--enable-optimizations` 打开优化后编译失败, 可以考虑移除这个参数
 
 3. 创建软链接
 

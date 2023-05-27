@@ -100,6 +100,8 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 
    ```bash
    wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz
+   # 国内服务器可使用淘宝镜像
+   # wget https://registry.npmmirror.com/-/binary/python/3.11.3/Python-3.11.3.tgz
    tar xvzf Python-3.11.3.tgz
    cd Python-3.11.3
    ```
@@ -107,8 +109,8 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 2. 配置并编译
 
    ```bash
-   ./configure --prefix=/usr/local/python3.11 --with-openssl=/usr/local/openssl --with-openssl-rpath=auto --enable-optimization
-   make -j 4 && make altinstall
+   ./configure --prefix=/usr/local/python3.11 --with-openssl=/usr/local/openssl --with-openssl-rpath=auto --enable-optimizations
+   make -j && make altinstall
    ```
 
    其中最重要的是 `--with-openssl=/usr/local/openssl` 和 `--with-openssl-rpath=auto` 这两个关键参数决定了能否使用最新的 `openssl`, 也是本文中最大的坑.

@@ -49,7 +49,7 @@ Params:
       url: "https://t.me/ImYrS"
 
   editPost:
-    URL: "https://github.com/ImYrS/blog/edit/main/content/posts"
+    URL: "https://github.com/ImYrS/blog/edit/main/content"
     Text: "Edit on GitHub"
     appendFilePath: true
 
@@ -81,14 +81,18 @@ menu:
       name: "搜索"
       url: /search
       weight: 10
-    - identifier: "分类"
-      name: "分类"
-      url: /categories
-      weight: 20
+    # - identifier: "分类"
+    #   name: "分类"
+    #   url: /categories
+    #   weight: 20
     - identifier: "归档"
       name: "归档"
       url: /archives
       weight: 30
+    - identifier: "简历"
+      name: "简历"
+      url: https://me.imyrs.cn
+      weight: 40
 
 outputs:
   home:

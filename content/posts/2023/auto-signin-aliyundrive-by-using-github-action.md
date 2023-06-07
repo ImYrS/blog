@@ -15,8 +15,9 @@ draft: false
 本文介绍了如何使用 [ImYrS/aliyun-auto-signin](https://github.com/ImYrS/aliyun-auto-signin) 项目, 利用 GitHub 提供的 Actions 功能, 实现每日自动签到阿里云盘, 无需服务器, 无需额外的费用.
 
 此文默认你知道:
-	1. GitHub 是什么, 如何访问及其基础知识
-	1. 阿里云盘签到的相关内容
+
+1. GitHub 是什么, 如何访问及其基础知识
+2. 阿里云盘签到的相关内容
 
 ## 部署步骤
 

@@ -3,8 +3,8 @@ title: "在 CentOS 7 上安装 Python 3.11"
 description: "如何在 CentOS 7 上编译安装 Python 3.11, 3.10 或更高版本并避免 SSL 模块报错"
 date: 2023-05-12T23:00:48+08:00
 lastmod: 2023-05-12T23:00:48+08:00
-categories:
-tags:
+categories: ["教程"]
+tags: ["CentOS", "Python", "OpenSSL"]
 
 weight:
 draft: false

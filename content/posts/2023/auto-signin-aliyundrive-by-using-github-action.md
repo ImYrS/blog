@@ -3,8 +3,8 @@ title: "使用 GitHub Actions 实现阿里云盘自动签到"
 description: "使用 GitHub Actions 无需服务器实现自动化阿里云盘的每日自动签到"
 date: 2023-06-07T22:08:26+08:00
 lastmod: 2023-06-07T22:08:26+08:00
-categories:
-tags:
+categories: ["教程", "技术"]
+tags: ["阿里云盘", "自动化", "GitHub", "Actions"]
 
 weight:
 draft: false

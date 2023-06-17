@@ -1,8 +1,8 @@
 ---
-title: "支持多线程下载的视频爬虫案例: 一堂直播"
-description: "以一堂直播课为案例, 讲一个非常简单的, 支持多线程下载的视频爬虫"
+title: "支持多线程下载的视频爬虫案例"
+description: "以某直播视频课网站为案例, 讲一个非常简单的, 支持多线程下载的视频爬虫"
 date: 2023-06-17T02:59:35+08:00
-lastmod: 2023-06-17T02:59:35+08:00
+lastmod: 2023-06-17T17:00:+08:00
 categories: ["教程", "爬虫"]
 tags: ["爬虫", "Python", "下载"]
 
@@ -12,11 +12,13 @@ draft: false
 
 ## 前情提要
 
-我的一位朋友因为没有正版 IDM 也懒得折腾, 经常会把他在一堂直播的视频链接发给我, 让我用 IDM 代为下载保存, 因为这些视频过几天就会隐藏或者变为付费. 帮了一段时间的忙以后, 我决定看看这玩意到底咋回事儿, 能不能写个爬虫脚本让他自己下载.
+我的一位朋友因为没有正版 IDM 也懒得折腾, 经常会把他在某直播课的录播视频链接发给我, 让我用 IDM 代为下载保存, 因为这些视频过几天就会隐藏或者变为付费. 帮了一段时间的忙以后, 我决定看看这玩意到底咋回事儿, 能不能写个爬虫脚本让他自己下载.
 
 经过几分钟的研究, 发现其实非常简单, 就写了个小脚本顺利完成任务. 并有了这篇文章以作记录和帮助初学 Python 爬虫的朋友更进一步.
 
 ![](https://cdn.imyrs.cn/u/i/img/202306170315521.png)
+
+**下文中我们将此视频网站称之为 `Y 站` 方便描述.**
 
 文内配图为了隐私处理, 可能有较多马赛克, 一般都是涉及具体的 `userId` 或者 `videoId` 等参数, 不影响阅读, 请见谅. 接下来进入正题.
 
@@ -28,7 +30,7 @@ draft: false
 
 ### 收集线索
 
-**一堂的视频链接都是这种格式: `https://air.yitang.top/live/XXXXXXX?_uds=hyyy_qgg_live`, 这个 `XXXXX` 我们称之为 `videoId`**. 一般来说, 在线播放的视频都是通过 `m3u8` 格式的切片视频整合而成, 那这个 `m3u8` 的文件也通常会通过某个 API 接口获取, 再由前端解析并加载视频.
+**Y 站的视频链接都是这种格式: `https://air.XXXXX.top/live/XXXXXXX?_uds=hyyy_qgg_live`, 这个 `XXXXX` 我们称之为 `videoId`**. 一般来说, 在线播放的视频都是通过 `m3u8` 格式的切片视频整合而成, 那这个 `m3u8` 的文件也通常会通过某个 API 接口获取, 再由前端解析并加载视频.
 
 那第一步直接在浏览器打开, 用开发者工具 (俗称 F12) 的 网络 (Network) 查看请求. 我们直接选择只查看 `Fetch/XHR` 请求, 也就是 API 请求.
 
@@ -40,7 +42,7 @@ draft: false
 
 ![](https://cdn.imyrs.cn/u/i/img/202306170324273.png)
 
-可以看到, 这个 URL 为 `https://air.yitang.top/api/air/room/replay` 的接口响应数据中存在一个 `m3u8` 文件的地址, 并且和上面浏览器加载的一样. 可以判断这就是获取视频流的接口.
+可以看到, 这个 URL 为 `https://air.XXXXX.top/api/air/room/replay` 的接口响应数据中存在一个 `m3u8` 文件的地址, 并且和上面浏览器加载的一样. 可以判断这就是获取视频流的接口.
 
 接下来分析请求参数, **发现视频链接中的 `videoId` 在这个请求中以名为 `sid` 的参数传递给了后端, 盲猜 `sid` 是 `streamId` 的简称**. 其他参数看起来不是很重要, 暂时忽略.
 
@@ -62,7 +64,7 @@ draft: false
 
 ## 测试接口
 
-经过分析, 我们知道在 `GET` `https://air.yitang.top/api/air/room/replay` 这个接口携带 `sid` 参数和鉴权令牌, 应该可以获取到视频流的地址. 开始上代码测试.
+经过分析, 我们知道在 `GET` `https://air.XXXXX.top/api/air/room/replay` 这个接口携带 `sid` 参数和鉴权令牌, 应该可以获取到视频流的地址. 开始上代码测试.
 
 ```python
 from json import dumps
@@ -70,7 +72,7 @@ from json import dumps
 import requests
 
 r = requests.get(
-    'https://air.yitang.top/api/air/room/replay',
+    'https://air.XXXXX.top/api/air/room/replay',
     params={
         'sid': 'fWXXXXXXXm',
     },
@@ -84,7 +86,7 @@ print(dumps(r.json(), indent=4, ensure_ascii=False))
 
 ![](https://cdn.imyrs.cn/u/i/img/202306170344776.png)
 
-很顺利, 直接拿到了想要的结果. 看起来一堂对鉴权的反爬基本是没做额外处理.
+很顺利, 直接拿到了想要的结果. 看起来 Y 站对鉴权的反爬基本是没做额外处理.
 
 ## 下载视频
 
@@ -113,7 +115,7 @@ import m3u8
 from tqdm import tqdm
 
 r = requests.get(
-    'https://air.yitang.top/api/air/room/replay',
+    'https://air.XXXXX.top/api/air/room/replay',
     params={
         'sid': 'fWXXXXXXXm',
     },
@@ -142,7 +144,7 @@ with open('tmp.ts', 'wb') as f:
 
 Python 自带一个 `threading` 可以用于处理多线程事务. 我们简单利用即可.
 
-已知我们需要现在数个切片文件, 对于一堂来说, 这个数量通常在几百到上千, 我决定设置并发数为 12, 也就是同时下载 12 个. 这个数值可以根据实际情况, 比如带宽用量, 服务器是否有限制等, 进行合理规划, 不一定是越大越好. 任何情况建议不要超过 16.
+已知我们需要现在数个切片文件, 对于 Y 站来说, 这个数量通常在几百到上千, 我决定设置并发数为 12, 也就是同时下载 12 个. 这个数值可以根据实际情况, 比如带宽用量, 服务器是否有限制等, 进行合理规划, 不一定是越大越好. 任何情况建议不要超过 16.
 
 写两个函数, 一个用于下载单个文件, 一个用于处理多线程事务.
 
@@ -239,7 +241,7 @@ def join_files(files, output):
   def input_token() -> str:
       global token
       token = input(
-          '在一堂直播页面按 F12 打开控制台，输入 localStorage.token 即可查看 token\n'
+          '在 Y 站面按 F12 打开控制台，输入 localStorage.token 即可查看 token\n'
           '请输入 token: '
       )
       with open(token_file, 'w') as f:
@@ -251,7 +253,7 @@ def join_files(files, output):
 - 自动从视频链接中解析 `sid`
   ```python
   def get_stream_id(url: str) -> str:
-      # https://air.yitang.top/live/XXXXXX?_uds=hyyy_qgg_live
+      # https://air.XXXXX.top/live/XXXXXX?_uds=hyyy_qgg_live
       return url.split('/')[-1].split('?')[0]
   ```
 
@@ -259,7 +261,7 @@ def join_files(files, output):
   ```python
   def get_video_name(sid: str) -> Optional[str]:
       r = requests.get(
-          url='https://air.yitang.top/api/air/room/info',
+          url='https://air.XXXXX.top/api/air/room/info',
           params={
               'sid': sid,
           },
@@ -282,4 +284,4 @@ def join_files(files, output):
 
 由于项目过于简单, 而且几乎所有代码已经展示在文中, 故不提供完整代码下载方式. 自己动手, 多多益善.
 
-在进行此项目时, 还发现了一堂获取视频流文件的这个接口, 对用户权限校验似乎不太对, 有一些其他接口提示无权限查看的视频, 可以直接通过这个接口请求视频流文件. 而这个视频流文件存放于 CDN, 且未设置鉴权. 不过因为文件名极长, 不太可能存在穷举爆破情况. 但视频流中的视频切片实际托管于腾讯云点播服务, 也没有鉴权, 其中可能有不少潜在问题可以优化.
+在进行此项目时, 还发现了 Y 站获取视频流文件的这个接口, 对用户权限校验似乎不太对, 有一些其他接口提示无权限查看的视频, 可以直接通过这个接口请求视频流文件. 而这个视频流文件存放于 CDN, 且未设置鉴权. 不过因为文件名极长, 不太可能存在穷举爆破情况. 但视频流中的视频切片实际托管于腾讯云点播服务, 也没有鉴权, 其中可能有不少潜在问题可以优化.

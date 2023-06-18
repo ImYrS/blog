@@ -36,7 +36,8 @@ Params:
   ShowPostNavLinks: true
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
-  ShowWordCounts: true
+  ShowWordCount: true
+  comments: true
 
   homeInfoParams:
     title: "你好 👋"
@@ -50,7 +51,7 @@ Params:
 
   editPost:
     URL: "https://github.com/ImYrS/blog/edit/main/content"
-    Text: "Edit on GitHub"
+    Text: "在 GitHub 编辑"
     appendFilePath: true
 
   fuseOpts:
@@ -61,6 +62,10 @@ Params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
+  
+  artalk:
+    server: "https://artalk.imyrs.cn"
+    site: "ImYrS's Blog"
 
 markup:
   highlight:

@@ -1,0 +1,22 @@
+<link href="https://npm.elemecdn.com/artalk@2.5.5/dist/Artalk.css" rel="stylesheet" />
+<script src="https://npm.elemecdn.com/artalk@2.5.5/dist/Artalk.js"></script>
+
+<!-- Artalk -->
+<div id="comments"></div>
+
+<script>
+  let darkMode = "auto";
+  let selectedTheme = localStorage.getItem("pref-theme");
+  if (selectedTheme)
+    selectedTheme === "dark" ? (darkMode = true) : (darkMode = false);
+
+  Artalk.init({
+    el: "#comments",
+    pageKey: "{{ .Permalink }}",
+    pageTitle: "{{ .Title }}",
+    server: "{{ $.Site.Params.artalk.server }}",
+    site: "{{ $.Site.Params.artalk.site }}",
+    darkMode: darkMode,
+    vote: true,
+  });
+</script>

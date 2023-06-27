@@ -79,37 +79,29 @@ jobs:
 
 ![](https://cdn.imyrs.cn/u/i/img/202306072228928.png)
 
-### 获取阿里云盘账号 `refresh token`
+### 扫码获取阿里云盘 `refresh token` (推荐)
 
-#### 扫码获取 (推荐)
+  打开 [阿里云盘扫码登陆](https://ali-qr.imyrs.cn) 点击登录并使用阿里云盘 App 扫码.
 
-打开 [阿里云盘扫码登陆](https://ali-qr.imyrs.cn) 点击登录并扫码.
+  ![](https://cdn.imyrs.cn/u/i/img/202306271259427.png)
 
-![](https://cdn.imyrs.cn/u/i/img/202306271259427.png)
+  登陆时可能提示异地登陆, 这是因为登录请求实际上是由服务器发起. 由于受限于官方接口, 无法直接从浏览器发起请求. 服务器实际上不会保存任何隐私数据.
 
-登陆时可能提示异地登陆, 这是因为登录请求实际上是由服务器发起. 
+  登陆完成后页面将会显示 `refresh token`, 点击右侧按钮复制即可.
 
-![](https://cdn.imyrs.cn/u/i/img/202306271301892.png)
+  ![](https://cdn.imyrs.cn/u/i/img/202306271254771.png)
 
-由于受限于官方接口, 无法直接从浏览器发起请求. 服务器实际上不会保存任何隐私数据.
+### 浏览器手动获取 `refresh token`
 
-![](https://cdn.imyrs.cn/u/i/img/202306271257819.png)
+  在电脑浏览器**使用无痕模式**打开 [阿里云盘官网](https://aliyundrive.com) 并登录账号
 
-登陆完成后页面将会显示 `refresh token`, 点击右侧按钮复制即可.
+  按 F12 打开开发者工具, 在控制台内输入 `console.log(JSON.parse(localStorage.token).refresh_token)` 或 `console.log(JSON.parse(sessionStorage.token).refresh_token)` 即可看到当前帐号的 `refresh token`.
 
-![](https://cdn.imyrs.cn/u/i/img/202306271254771.png)
+  ![](https://cdn.imyrs.cn/u/i/img/202306072243468.png)
 
-#### 浏览器手动获取
+  **不要在浏览器点击退出登录按钮, 这可能会导致令牌提前失效.** 直接关闭无痕浏览器即可.
 
-在电脑浏览器**使用无痕模式**打开 [阿里云盘官网](https://aliyundrive.com) 并登录账号
-
-按 F12 打开开发者工具, 在控制台内输入 `console.log(JSON.parse(localStorage.token).refresh_token)` 或 `console.log(JSON.parse(sessionStorage.token).refresh_token)` 即可看到当前帐号的 `refresh token`.
-
-![](https://cdn.imyrs.cn/u/i/img/202306072243468.png)
-
-**不要在浏览器点击退出登录按钮, 这可能会导致令牌提前失效.** 直接关闭无痕浏览器即可.
-
-如果需要同时签到多个账号, 现在请保存好此令牌. 重复上述流程, 获取多个令牌并保存好.
+  如果需要同时签到多个账号, 现在请保存好此令牌. 重复上述流程, 获取多个令牌并保存好.
 
 ### 配置 GitHub Secrets
 

@@ -2,7 +2,7 @@
 title: "使用 GitHub Actions 实现阿里云盘自动签到"
 description: "使用 GitHub Actions 无需服务器实现自动化阿里云盘的每日自动签到"
 date: 2023-06-07T22:08:26+08:00
-lastmod: 2023-06-07T22:08:26+08:00
+lastmod: 2023-06-27T13:00:00+08:00
 categories: ["教程", "技术"]
 tags: ["阿里云盘", "自动化", "GitHub", "Actions"]
 
@@ -81,9 +81,29 @@ jobs:
 
 ### 获取阿里云盘账号 `refresh token`
 
+#### 扫码获取 (推荐)
+
+打开 [阿里云盘扫码登陆](https://ali-qr.imyrs.cn) 点击登录并扫码.
+
+![](https://cdn.imyrs.cn/u/i/img/202306271259427.png)
+
+登陆时可能提示异地登陆, 这是因为登录请求实际上是由服务器发起. 
+
+![](https://cdn.imyrs.cn/u/i/img/202306271301892.png)
+
+由于受限于官方接口, 无法直接从浏览器发起请求. 服务器实际上不会保存任何隐私数据.
+
+![](https://cdn.imyrs.cn/u/i/img/202306271257819.png)
+
+登陆完成后页面将会显示 `refresh token`, 点击右侧按钮复制即可.
+
+![](https://cdn.imyrs.cn/u/i/img/202306271254771.png)
+
+#### 浏览器手动获取
+
 在电脑浏览器**使用无痕模式**打开 [阿里云盘官网](https://aliyundrive.com) 并登录账号
 
-按 F12 打开开发者工具, 在控制台内输入 `JSON.parse(localStorage.token).refresh_token` 或 `console.log(JSON.parse(localStorage.token).refresh_token)` 即可看到当前帐号的 `refresh token`.
+按 F12 打开开发者工具, 在控制台内输入 `console.log(JSON.parse(localStorage.token).refresh_token)` 或 `console.log(JSON.parse(sessionStorage.token).refresh_token)` 即可看到当前帐号的 `refresh token`.
 
 ![](https://cdn.imyrs.cn/u/i/img/202306072243468.png)
 

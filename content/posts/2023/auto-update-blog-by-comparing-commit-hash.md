@@ -80,6 +80,24 @@ if [[ "$new_commit" != "$commit" ]]; then
 fi
 ```
 
+## 自动化
+
+通过配置服务器 crontab 来实现自动更新
+
+```bash
+crontab -e
+```
+
+添加一条
+
+```bash
+*/10 * * * *  /bin/bash /root/hugo-update.sh >> /www/logs/hugo-update.log 2>&1
+```
+
+表示每十分钟执行一次脚本, 并将结果输出到 `/www/logs/hugo-update.log` 文件中.
+
+可以按需添加更多输出, 包括运行时间等等.
+
 ## 其他
 
 如果你博客的 GitHub 仓库不是公开仓库, 那在执行 `git pull` 的时候可能需要输入用户名和密码, 无法实现自动化. 你需要在服务器项目路径内执行 `git config credential.helper store`, 然后手动 `git pull` 一次, 凭证将自动保存在服务器, 下次无需输入密码.

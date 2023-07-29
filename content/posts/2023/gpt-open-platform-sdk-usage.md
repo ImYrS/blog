@@ -2,7 +2,7 @@
 title: "GPT+ Open Platform SDK 示例"
 description: "GPT+ 开放平台的 SDK 简单用法介绍和示例."
 date: 2023-06-20T14:13:30+08:00
-lastmod: 2023-06-20T14:13:30+08:00
+lastmod: 2023-07-29T13:32:00+08:00
 categories: ["教程"]
 tags: ["GPT+", "GPT", "OpenAI", "SDK", "AI"]
 
@@ -16,17 +16,25 @@ GPT+ ([官网链接](https://cn.ss.chat)) 是一个基于 OpenAI 的语言模型
 
 [GPT+ Open Platform](https://cn.ss.chat/user/apps), 指 GPT+ 开放平台, 又称 gpto, GPT+ Open 等. 是 GPT+ API 的授权组件和接入模块. 提供了高可读性的 API 文档和代码规范的 SDK 可供参考.
 
-## SDK 下载
+## SDK 安装
 
-SDK 模块可以在 GPT+ 网站中的开放平台页面中下载.
+SDK 模块的安装方式可以在 GPT+ 网站中的开放平台页面查看
 
-![](https://cdn.imyrs.cn/u/i/img/202306201420473.png)
+![](https://cdn.imyrs.cn/u/i/img/202307291313133.png)
 
 ## Python
 
-1. 将下载的 `gptopen.py` 文件放在同级目录.
+1. 使用以下命令安装 SDK.
+   ```bash
+   pip install --upgrade gptopen
+   ```
 
-2. 该 SDK 依赖 `requests` 模块, 需要使用 `pip install requests` 安装.
+2. 如提示以下错误可能是因为使用了国内镜像, 尚未完成同步.
+   ![](https://cdn.imyrs.cn/u/i/img/202307291318758.png)使用以下命令指定 pypi 源安装即可.
+
+   ```bash
+   pip install --upgrade gptopen -i https://pypi.org/simple
+   ```
 
 3. 引入 SDK 并初始化. **请不要将 `app_id` `app_key` 等鉴权密钥硬编码在代码中.**
    ```python
@@ -38,7 +46,7 @@ SDK 模块可以在 GPT+ 网站中的开放平台页面中下载.
        app_key='app_key',
    )
    ```
-   
+
 4. SDK 初始化时可以选择使用 `app_id` 和 `app_key` 自动获取 `access_token`, 也可以在特定情况下直接使用已有的 `access_token`.
    ```python
    from gptopen import App

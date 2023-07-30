@@ -2,7 +2,7 @@
 title: "一种基于 commit 自动更新和部署博客的方案"
 description: "对比 git commit hash 来检查是否存在内容更新并重新构建静态页面的方案"
 date: 2023-07-28T22:19:06+08:00
-lastmod: 2023-07-28T22:19:06+08:00
+lastmod: 2023-07-30T14:42:00+08:00
 categories: ["教程", "技术"]
 tags: ["博客", "Git", "Hugo", "静态博客"]
 
@@ -54,6 +54,11 @@ new_commit=$(cat .git/refs/heads/main)
 if [[ "$new_commit" != "$commit" ]]; then
         {{execute your site rebuild program}}
 fi
+
+echo "----------------------------------------------------------------------------"
+endDate=`date +"%Y-%m-%d %H:%M:%S"`
+echo ">> [$endDate] Successful"
+echo "----------------------------------------------------------------------------"
 ```
 
 `{{your site folder}}` 部分改为你站点路径
@@ -76,8 +81,16 @@ new_commit=$(cat .git/refs/heads/main)
 if [[ "$new_commit" != "$commit" ]]; then
         echo "Updates detected, rebuilding pages."
         rm -rf public/*
-        ./hugo --cleanDestinationDir
+        # 我将 Hugo 程序本体放在网站根目录
+        # 所以生成静态页面的命令就是 ./hugo
+        # 其他情况需要按需配置
+        ./hugo
 fi
+
+echo "----------------------------------------------------------------------------"
+endDate=`date +"%Y-%m-%d %H:%M:%S"`
+echo ">> [$endDate] Successful"
+echo "----------------------------------------------------------------------------"
 ```
 
 ## 自动化
@@ -91,10 +104,10 @@ crontab -e
 添加一条
 
 ```bash
-*/10 * * * *  /bin/bash /root/hugo-update.sh >> /www/logs/hugo-update.log 2>&1
+*/10 * * * *  /bin/bash /root/update-blog.sh >> /www/logs/update-blog.log 2>&1
 ```
 
-表示每十分钟执行一次脚本, 并将结果输出到 `/www/logs/hugo-update.log` 文件中.
+表示每十分钟执行一次脚本, 并将结果输出到 `/www/logs/update-blog.log` 文件中.
 
 可以按需添加更多输出, 包括运行时间等等.
 

@@ -10,6 +10,12 @@ weight:
 draft: false
 ---
 
+## 更新
+
+2023-09-22 由于仓库遭到 GitHub 封禁, **本文所述方法已失效**. 请使用[新签到平台](https://aliyundrive.pro), 支持 基础签到 + 任务签到 + 活动自动完成.
+
+
+
 ## 概述
 
 本文介绍了如何使用 [ImYrS/aliyun-auto-signin](https://github.com/ImYrS/aliyun-auto-signin) 项目, 利用 GitHub 提供的 Actions 功能, 实现每日自动签到阿里云盘, 无需服务器, 无需额外的费用.

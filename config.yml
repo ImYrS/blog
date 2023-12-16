@@ -1,4 +1,4 @@
-baseURL: https://imyrs.cn
+baseURL: https://imyrs.com
 title: ImYrS's Blog
 
 languageCode: zh
@@ -20,7 +20,6 @@ enableGitInfo: false
 enableInlineShortcodes: true
 
 minify:
-  disableXML: true
   minifyOutput: true
 
 Params:
@@ -37,7 +36,7 @@ Params:
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   ShowWordCount: true
-  comments: true
+  comments: false
 
   homeInfoParams:
     title: "你好 👋"
@@ -47,7 +46,7 @@ Params:
     - name: github
       url: "https://github.com/ImYrS"
     - name: telegram
-      url: "https://t.me/ImYrS"
+      url: "https://nextBard.t.me"
 
   editPost:
     URL: "https://github.com/ImYrS/blog/edit/main/content"

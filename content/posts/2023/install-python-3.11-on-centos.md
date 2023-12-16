@@ -50,12 +50,12 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 4. 下载最新 `openssl` 并解压
 
    ```bash
-   wget https://www.openssl.org/source/openssl-1.1.1t.tar.gz
-   tar -zxf openssl-1.1.1t.tar.gz
-   cd openssl-1.1.1t
+   wget https://www.openssl.org/source/openssl-1.1.1w.tar.gz
+   tar -zxf openssl-1.1.1w.tar.gz
+   cd openssl-1.1.1w
    ```
 
-   需要注意, 本文发布时已经 `openssl` 已经发布了 `3.0.0` 版本, 但没有测试该大版本与 `python` 的兼容性, 建议谨慎操作.
+   需要注意, 本文发布时已经 `openssl` 已经发布了 `3.x.x` 版本, 但没有测试该大版本与 `python` 的兼容性, 建议谨慎操作.
 
 5. 配置并编译安装
 
@@ -99,14 +99,48 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 1. 下载安装包并解压
 
    ```bash
-   wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz
+   wget https://www.python.org/ftp/python/3.11.7/Python-3.11.7.tgz
    # 国内服务器可使用淘宝镜像
-   # wget https://registry.npmmirror.com/-/binary/python/3.11.3/Python-3.11.3.tgz
-   tar xvzf Python-3.11.3.tgz
-   cd Python-3.11.3
+   # wget https://registry.npmmirror.com/-/binary/python/3.11.7/Python-3.11.7.tgz
+   tar xvzf Python-3.11.7.tgz
+   cd Python-3.11.7
    ```
 
-2. 配置并编译
+2. 更新 gcc (可选)
+
+   如果你希望编译 Python 时使用 `--enable-optimizations` 参数, 也就是开启性能优化, 你需要留意你的 gcc 版本. 一般情况下 CentOS 7 的上 gcc 版本是很落后的 (一般是 4.8.5), 我们需要 >=8.1.0 版本.
+
+   1. 安装 gcc 10
+
+      ```bash
+      yum install centos-release-scl -y
+      yum install devtoolset-10-gcc* -y
+      
+      # 自动安装在 /opt/rh/devtoolset-10 目录下
+      ```
+
+   2. 安装完成后临时生效
+
+      ```bash
+      source /opt/rh/devtoolset-10/enable
+      ```
+
+   3. 如需永久启用 gcc 10 可以删除旧版并软连接新版
+
+      ```bash
+      mv /usr/bin/gcc /usr/bin/gcc-4.8.5
+      ln -s /opt/rh/devtoolset-10/root/bin/gcc /usr/bin/gcc
+      mv /usr/bin/g++ /usr/bin/g++-4.8.5
+      ln -s /opt/rh/devtoolset-10/root/bin/g++ /usr/bin/g++
+      ```
+
+   4. 此时查看 gcc 版本应 >=10.2.1
+
+      ```bash
+      gcc -v
+      ```
+
+3. 配置并编译
 
    ```bash
    ./configure --prefix=/usr/local/python3.11 --with-openssl=/usr/local/openssl --with-openssl-rpath=auto --enable-optimizations
@@ -115,16 +149,16 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 
    其中最重要的是 `--with-openssl=/usr/local/openssl` 和 `--with-openssl-rpath=auto` 这两个关键参数决定了能否使用最新的 `openssl`, 也是本文中最大的坑.
 
-   如果 `--enable-optimizations` 打开优化后编译失败或遇到 `Could not import runpy module` 错误, 可以考虑移除这个参数.
+   如果 `--enable-optimizations` 打开优化后编译失败或遇到 `Could not import runpy module` 错误, 可以考虑移除这个参数或参考上面步骤更新 gcc.
 
-3. 创建软链接
+4. 创建软链接
 
    ```bash
    ln -sf /usr/local/python3.11/bin/pip3.11 /usr/bin/pip3.11
    ln -sf /usr/local/python3.11/bin/python3.11 /usr/bin/python3.11
    ```
 
-4. 验证
+5. 验证
 
    ```bash
    python3.11 -V

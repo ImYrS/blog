@@ -97,10 +97,6 @@ menu:
       name: "归档"
       url: /archives
       weight: 40
-    - identifier: "简历"
-      name: "简历"
-      url: https://me.imyrs.cn
-      weight: 50
 
 outputs:
   home:

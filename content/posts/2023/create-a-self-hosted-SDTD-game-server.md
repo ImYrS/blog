@@ -65,7 +65,7 @@ source /etc/profile
 
 此时在命令行可以输出代理即可
 
-![](https://cdn.imyrs.cn/u/i/img/202306131221056.png)
+![](https://imyrs.net/u/i/img/202306131221056.png)
 
 其他系统查找类似设置全局代理的环境变量配置即可
 
@@ -331,17 +331,17 @@ nano ~/serverfiles/sdtdserver.xml
 
 图为 NAT 情况下的映射规则, 可作为参考
 
-![](https://cdn.imyrs.cn/u/i/img/202306131301588.png)
+![](https://imyrs.net/u/i/img/202306131301588.png)
 
 ## 启动服务器
 
 修改完配置后, 使用 `./sdtdserver start` 启动游戏
 
-![](https://cdn.imyrs.cn/u/i/img/202306131253657.png)
+![](https://imyrs.net/u/i/img/202306131253657.png)
 
 此时使用 `./sdtdserver dt` 命令可以查看服务器状态
 
-![](https://cdn.imyrs.cn/u/i/img/202306131255393.png)
+![](https://imyrs.net/u/i/img/202306131255393.png)
 
 ## 更多
 

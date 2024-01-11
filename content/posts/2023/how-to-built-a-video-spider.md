@@ -16,7 +16,7 @@ draft: false
 
 经过几分钟的研究, 发现其实非常简单, 就写了个小脚本顺利完成任务. 并有了这篇文章以作记录和帮助初学 Python 爬虫的朋友更进一步.
 
-![](https://cdn.imyrs.cn/u/i/img/202306170315521.png)
+![](https://imyrs.net/u/i/img/202306170315521.png)
 
 **下文中我们将此视频网站称之为 `Y 站` 方便描述.**
 
@@ -34,19 +34,19 @@ draft: false
 
 那第一步直接在浏览器打开, 用开发者工具 (俗称 F12) 的 网络 (Network) 查看请求. 我们直接选择只查看 `Fetch/XHR` 请求, 也就是 API 请求.
 
-![](https://cdn.imyrs.cn/u/i/img/202306170320527.png)
+![](https://imyrs.net/u/i/img/202306170320527.png)
 
 可以看到, 这里有不少的请求, 最后一条尤为显眼. `m3u8` 文件, 正是我们需要的. 既然有了这个, 那肯定有相关的 API 来获取这个文件.
 
 依次分析上面的请求, 简单来说就是看响应内容, 定位到了这个请求:
 
-![](https://cdn.imyrs.cn/u/i/img/202306170324273.png)
+![](https://imyrs.net/u/i/img/202306170324273.png)
 
 可以看到, 这个 URL 为 `https://air.XXXXX.top/api/air/room/replay` 的接口响应数据中存在一个 `m3u8` 文件的地址, 并且和上面浏览器加载的一样. 可以判断这就是获取视频流的接口.
 
 接下来分析请求参数, **发现视频链接中的 `videoId` 在这个请求中以名为 `sid` 的参数传递给了后端, 盲猜 `sid` 是 `streamId` 的简称**. 其他参数看起来不是很重要, 暂时忽略.
 
-![](https://cdn.imyrs.cn/u/i/img/202306170330147.png)
+![](https://imyrs.net/u/i/img/202306170330147.png)
 
 ### 分析鉴权
 
@@ -54,11 +54,11 @@ draft: false
 
 先检查 `Cookie` 感觉都是一些无关紧要的东西, 比较有用的也只是个类似 `uid` 的东西.
 
-![](https://cdn.imyrs.cn/u/i/img/202306170335614.png)
+![](https://imyrs.net/u/i/img/202306170335614.png)
 
 再看 `LocalStorage`, 发现了一个似乎很重要的东西叫 `token`, 然后又在请求头中的 `Authorization` 字段找到了一样的数据, 基本可以认定这就是鉴权所用的令牌. 还是很简单的.
 
-![](https://cdn.imyrs.cn/u/i/img/202306170339053.png)
+![](https://imyrs.net/u/i/img/202306170339053.png)
 
 再检查了一下请求中其余的请求头和参数, 感觉大部分没有业务功能, 可能是一些用于做访问分析的参数, 暂时可以不管, 之后有问题再来看.
 
@@ -84,7 +84,7 @@ r = requests.get(
 print(dumps(r.json(), indent=4, ensure_ascii=False))
 ```
 
-![](https://cdn.imyrs.cn/u/i/img/202306170344776.png)
+![](https://imyrs.net/u/i/img/202306170344776.png)
 
 很顺利, 直接拿到了想要的结果. 看起来 Y 站对鉴权的反爬基本是没做额外处理.
 
@@ -105,7 +105,7 @@ for i in playlist:
     print(i.uri)
 ```
 
-![](https://cdn.imyrs.cn/u/i/img/202306170352588.png)
+![](https://imyrs.net/u/i/img/202306170352588.png)
 
 可以看到输出了非常多个视频切片地址, 我们需要依次下载. 方便查看运行情况, 加上一个 `tqdm` 模块展示进度.
 
@@ -136,7 +136,7 @@ with open('tmp.ts', 'wb') as f:
         f.write(r.content)
 ```
 
-![](https://cdn.imyrs.cn/u/i/img/202306170357916.png)
+![](https://imyrs.net/u/i/img/202306170357916.png)
 
 现在已经可以运行了, 但下载速度很慢.
 
@@ -224,11 +224,11 @@ def join_files(files, output):
 
 现在代码是这个样子的 (函数未展示)
 
-![](https://cdn.imyrs.cn/u/i/img/202306170415165.png)
+![](https://imyrs.net/u/i/img/202306170415165.png)
 
 现在运行试试
 
-![](https://cdn.imyrs.cn/u/i/img/202306170417650.png)
+![](https://imyrs.net/u/i/img/202306170417650.png)
 
 总用时只需要 20 秒, 之前需要两分钟.
 
@@ -278,7 +278,7 @@ def join_files(files, output):
 
 ## 最终效果
 
-![](https://cdn.imyrs.cn/u/i/img/202306170424676.png)
+![](https://imyrs.net/u/i/img/202306170424676.png)
 
 ## 最后
 

@@ -29,7 +29,7 @@ draft: false
 
 在 GitHub **创建** 一个新仓库, **不要 Fork**. 仓库名称可以自己设置.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072221078.png)
+![](https://imyrs.net/u/i/img/202306072221078.png)
 
 此处推荐使用 **公开** 仓库 (Public Repo). 因为按照 [GitHub 计费说明](https://github.com/settings/billing/plans) 所述, 公开仓库的 Actions 不计费, 私人仓库会有运行时间限制. 即使是公开仓库, 配置中的机密参数也无法被其他人看到.
 
@@ -37,7 +37,7 @@ draft: false
 
 在仓库中创建 `.github/workflows/signin.yml` 文件. 注意此处是纯英文路径, 不要使用浏览器翻译, 可能导致其他问题.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072226627.png)
+![](https://imyrs.net/u/i/img/202306072226627.png)
 
 将如下内容原封不动的粘贴至该文件中, 保存.
 
@@ -81,19 +81,19 @@ jobs:
 
 此时应如图所示
 
-![](https://cdn.imyrs.cn/u/i/img/202306072228928.png)
+![](https://imyrs.net/u/i/img/202306072228928.png)
 
 ### 扫码获取阿里云盘 `refresh token` (推荐)
 
   打开 [阿里云盘扫码登陆](https://qr.aliyundrive.pro) 点击登录并使用阿里云盘 App 扫码.
 
-  ![](https://cdn.imyrs.cn/u/i/img/202307301435378.png)
+  ![](https://imyrs.net/u/i/img/202307301435378.png)
 
   登陆时可能提示异地登陆, 这是因为受限于官方接口, 登录请求实际上是由服务器发起, 但实际上不会保存数据. [技术细节](https://github.com/ImYrS/aliyundrive-qr-login).
 
   登陆完成后页面将会显示 `refresh token`, 点击右侧按钮复制即可.
 
-  ![](https://cdn.imyrs.cn/u/i/img/202306271254771.png)
+  ![](https://imyrs.net/u/i/img/202306271254771.png)
 
 ### 浏览器手动获取 `refresh token`
 
@@ -101,7 +101,7 @@ jobs:
 
   按 F12 打开开发者工具, 在控制台内输入 `console.log(JSON.parse(localStorage.token).refresh_token)` 或 `console.log(JSON.parse(sessionStorage.token).refresh_token)` 即可看到当前帐号的 `refresh token`.
 
-  ![](https://cdn.imyrs.cn/u/i/img/202306072243468.png)
+  ![](https://imyrs.net/u/i/img/202306072243468.png)
 
   **不要在浏览器点击退出登录按钮, 这可能会导致令牌提前失效.** 直接关闭无痕浏览器即可.
 
@@ -111,35 +111,35 @@ jobs:
 
 在仓库上方的导航按钮中点击 `Settings`, 依次进入 `Secrets and Variables` -> `Actions` 中并点击 `New repository secret`.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072250097.png)
+![](https://imyrs.net/u/i/img/202306072250097.png)
 
-参考[项目教程](https://cdn.imyrs.cn/u/i/img/202306072254456.png)配置 Secrets
+参考[项目教程](https://imyrs.net/u/i/img/202306072254456.png)配置 Secrets
 
 #### 阿里云盘 `refresh token`
 
 名称为 `REFRESH_TOKENS`, Secret 值就是刚才获取到的 `refresh token`.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072253345.png)
+![](https://imyrs.net/u/i/img/202306072253345.png)
 
 多账户同时签到时, 使用英文逗号将多个 `token` 隔开.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072254456.png)
+![](https://imyrs.net/u/i/img/202306072254456.png)
 
 #### GitHub Personal Token
 
 前往 [Personal Access Tokens 配置页](https://github.com/settings/tokens). 点击 Generate new token **创建 classic 类型**的 token.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072301157.png)
+![](https://imyrs.net/u/i/img/202306072301157.png)
 
 名称 (Note) 自己填, 过期时长建议三个月以上. 时长越久, 越方便, 但也更不安全. **权限必须勾选 repo**.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072303513.png)
+![](https://imyrs.net/u/i/img/202306072303513.png)
 
 创建后 token 只能查看一次, 务必复制保存好.
 
 回到项目的 Secrets 配置页面并添加刚创建的 token, 名称为 `GP_TOKEN`
 
-![](https://cdn.imyrs.cn/u/i/img/202306072306583.png)
+![](https://imyrs.net/u/i/img/202306072306583.png)
 
 ### 配置推送渠道
 
@@ -149,11 +149,11 @@ jobs:
 
 将其中的 `PUSH_TYPES` 值改为配置的推送渠道, 多个渠道使用英文逗号隔开.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072314940.png)
+![](https://imyrs.net/u/i/img/202306072314940.png)
 
 按照项目说明中的提示和 Actions 配置文件, 照葫芦画瓢, 添加最相似的 secrets.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072319840.png)
+![](https://imyrs.net/u/i/img/202306072319840.png)
 
 将 `TELEGRAM_BOT_TOKEN` 和 `TELEGRAM_CHAT_ID` 配置到 secrets 以后即可.
 
@@ -161,15 +161,15 @@ jobs:
 
 默认情况下, 中国时间每天 22:40 左右会自动运行. 可以在项目上方导航栏中的 Actions 页面中查看. 也可以手动点击运行.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072324277.png)
+![](https://imyrs.net/u/i/img/202306072324277.png)
 
 可以进入单次运行中查看运行结果.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072326427.png)
+![](https://imyrs.net/u/i/img/202306072326427.png)
 
 如果配置了推送渠道, 也可以看到签到结果.
 
-![](https://cdn.imyrs.cn/u/i/img/202306072327627.png)
+![](https://imyrs.net/u/i/img/202306072327627.png)
 
 ## 原理及接口
 

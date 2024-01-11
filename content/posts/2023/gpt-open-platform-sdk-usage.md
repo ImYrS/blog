@@ -20,7 +20,7 @@ GPT+ ([官网链接](https://cn.ss.chat)) 是一个基于 OpenAI 的语言模型
 
 SDK 模块的安装方式可以在 GPT+ 网站中的开放平台页面查看
 
-![](https://cdn.imyrs.cn/u/i/img/202307291313133.png)
+![](https://imyrs.net/u/i/img/202307291313133.png)
 
 ## Python
 
@@ -30,7 +30,7 @@ SDK 模块的安装方式可以在 GPT+ 网站中的开放平台页面查看
    ```
 
 2. 如提示以下错误可能是因为使用了国内镜像, 尚未完成同步.
-   ![](https://cdn.imyrs.cn/u/i/img/202307291318758.png)使用以下命令指定 pypi 源安装即可.
+   ![](https://imyrs.net/u/i/img/202307291318758.png)使用以下命令指定 pypi 源安装即可.
 
    ```bash
    pip install --upgrade gptopen -i https://pypi.org/simple

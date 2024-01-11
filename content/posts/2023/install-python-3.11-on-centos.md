@@ -74,7 +74,7 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 
    在文件末尾添加 `/usr/local/openssl/lib` 
 
-   ![image-20230512235819057](https://cdn.imyrs.cn/u/i/img/202305122358082.png)
+   ![image-20230512235819057](https://imyrs.net/u/i/img/202305122358082.png)
 
    然后使配置生效
 
@@ -92,7 +92,7 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
 
    可以正确输出新安装的版本即可
 
-   ![image-20230512235726735](https://cdn.imyrs.cn/u/i/img/202305122357765.png)
+   ![image-20230512235726735](https://imyrs.net/u/i/img/202305122357765.png)
 
 ## 安装 Python 3.11
 
@@ -165,7 +165,7 @@ yum install -y yum install wget gcc-c++ pcre pcre-devel zlib zlib-devel libffi-d
    pip3.11 -V
    ```
 
-   ![image-20230513000422594](https://cdn.imyrs.cn/u/i/img/202305130004616.png)
+   ![image-20230513000422594](https://imyrs.net/u/i/img/202305130004616.png)
 
 ## 建议
 
@@ -181,4 +181,4 @@ source venv/bin/activate
 
 此时, 终端前会显示 `(venv)`, 即代表使用了当前的虚拟环境, 此时可以直接用 `python` 和 `pip` 命令而不是 `python3.11` 和 `pip3.11`. 使用 `pip` 安装的依赖也仅在当前虚拟环境中可用.
 
-![image-20230513001137367](https://cdn.imyrs.cn/u/i/img/202305130011389.png)
+![image-20230513001137367](https://imyrs.net/u/i/img/202305130011389.png)

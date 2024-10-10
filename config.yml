@@ -7,7 +7,10 @@ hasCJKLanguage: true
 
 theme: PaperMod
 
-paginate: 5
+pagination:
+  disableAliases: false
+  pagerSize: 5
+  path: page
 
 enableRobotsTXT: true
 
